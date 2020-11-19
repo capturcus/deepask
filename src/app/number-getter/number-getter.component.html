@@ -1,4 +1,6 @@
 <div class="number-getter-root">
-    <div class="prompt">podaj nr pytania</div>
-    <div class="question-number">{{questionNumber}}</div>
+    <div *ngIf="!showingText" class="prompt">podaj nr pytania</div>
+    <div *ngIf="!showingText" class="question-number">{{questionNumber}}</div>
+
+    <div *ngIf="showingText" class="prompt">{{showedText}}</div>
 </div>
