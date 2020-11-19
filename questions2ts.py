@@ -3,7 +3,7 @@
 with open("questions.txt") as f:
     contents = f.read()
 
-out = "export class Questions { public static QUESTIONS_EASY = ["
+out = "export class Questions { public static QUESTIONS_EASY = [\"\","
 
 questions_ez = ""
 questions_hard = ""

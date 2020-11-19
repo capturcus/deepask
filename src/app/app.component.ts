@@ -29,7 +29,8 @@ export class AppComponent {
 
   ngAfterViewInit() {
     this.numberGetter.questionChosenSubject.subscribe((number) => {
-      if (!this.questions.numValid(number)) {
+      console.log(number);
+      if (!this.questions.numValid(+number)) {
         this.numberGetter.showText("niepoprawny numer pytania");
         return;
       }

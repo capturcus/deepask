@@ -19,10 +19,13 @@ export class QuestionsService {
     } else {
       qs = Questions.QUESTIONS_EASY
     }
+    console.log(qs, num);
     return [qs, num];
   }
 
-  public numValid(num: string) {
+  public numValid(num: number) {
+    if (num === 0)
+      return false;
     let qsnum = this.getQsNum(+num);
     return qsnum[1] >= 0 && qsnum[1] < qsnum[0].length;
   }
