@@ -1,0 +1,14 @@
+.prompt {
+    font-size: 40pt;
+}
+
+.question-number {
+    font-size: 60pt;
+}
+
+.number-getter-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
