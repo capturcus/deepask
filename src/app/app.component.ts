@@ -31,13 +31,16 @@ export class AppComponent {
     this.numberGetter.questionChosenSubject.subscribe((number) => {
       console.log(number);
       if (!this.questions.numValid(+number)) {
-        this.numberGetter.showText("niepoprawny numer pytania");
+        let ls = this.questions.getLengths();
+        let ranges = "(1-" + ls[0] + ", " + this.questions.HARD_OFFSET + "-" +
+          (this.questions.HARD_OFFSET + ls[1]) + ")";
+        this.numberGetter.showText("niepoprawny numer pytania " + ranges);
         return;
       }
       this.currentState = this.ASKING_QUESTION;
       this.questionShower.setupQuestion(number);
     });
-    this.questionShower.questionFinishedSubjcet.subscribe((number) => {
+    this.questionShower.questionFinishedSubject.subscribe((number) => {
       this.currentState = this.USER_INPUT;
     });
   }

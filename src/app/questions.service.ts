@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Questions } from '../questions';
 
-const HARD_OFFSET = 69;
-
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +9,12 @@ export class QuestionsService {
   constructor() { }
   usedNumbers = {};
 
+  HARD_OFFSET = 100;
+
   getQsNum(num: number) {
     let qs;
-    if (num >= HARD_OFFSET) {
-      num -= HARD_OFFSET;
+    if (num >= this.HARD_OFFSET) {
+      num -= this.HARD_OFFSET;
       qs = Questions.QUESTIONS_HARD;
     } else {
       qs = Questions.QUESTIONS_EASY
@@ -41,5 +41,10 @@ export class QuestionsService {
 
   public isUsed(num: number) {
     return this.usedNumbers[num];
+  }
+
+  public getLengths() {
+    return [Questions.QUESTIONS_EASY.length - 1,
+      Questions.QUESTIONS_HARD.length - 1];
   }
 }

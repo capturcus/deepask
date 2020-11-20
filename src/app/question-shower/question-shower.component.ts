@@ -3,6 +3,7 @@ import { QuestionsService } from '../questions.service';
 import { Subject } from 'rxjs';
 
 const LETTER_INTERVAL = 30;
+const ALLOWED_CHARS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "Enter", "Backspace"];
 
 @Component({
   selector: 'app-question-shower',
@@ -16,8 +17,9 @@ export class QuestionShowerComponent implements OnInit {
   i = 0;
   interval;
   displaying: boolean = false;
+  used: boolean = false;
 
-  public questionFinishedSubjcet : Subject < any > = new Subject < any > ();
+  public questionFinishedSubject : Subject < any > = new Subject < any > ();
 
   constructor(
     private questions: QuestionsService
@@ -38,19 +40,28 @@ export class QuestionShowerComponent implements OnInit {
 
   public setupQuestion(num) {
     let q = this.questions.getQuestion(num);
+    if (this.questions.isUsed(num)) {
+      this.used = true;
+      this.currentText = q;
+      return;
+    }
+    this.used = false;
     console.log(q);
     this.targetText = q;
     this.displaying = true;
     this.interval = setInterval(this.tick.bind(this), LETTER_INTERVAL);
+    this.questions.setUsed(num);
   }
 
   public handleKeypress(event) {
+    if (!ALLOWED_CHARS.includes(event.key))
+      return;
     if (this.displaying)
       return;
     this.targetText = "";
     this.currentText = "";
     this.i = 0;
-    this.questionFinishedSubjcet.next(1);
+    this.questionFinishedSubject.next(1);
   }
 
   ngOnInit(): void {

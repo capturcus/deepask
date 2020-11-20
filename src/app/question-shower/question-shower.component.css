@@ -3,3 +3,8 @@
     height: 30vh;
     font-size: 25pt;
 }
+
+.used {
+    background: #5e5e5e;
+    padding: 2%;
+}
